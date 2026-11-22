@@ -81,15 +81,20 @@ class ProductsScreen extends StatelessWidget {
           ),
           body: ListView(
             children: products.map((product) {
-              return ProductCard(
-                product: product,
-                onFavoriteToggle: () {
-                  appState.toggleFavorite(product);
-                },
-                onAddToCart: () {
-                  appState.addToCart(product);
-                },
-              );
+              
+return ProductCard(
+  product: product,
+  isFavorite: appState.favoriteProducts.any(
+    (item) => item.id == product.id,
+  ),
+  onFavoriteToggle: () {
+    appState.toggleFavorite(product);
+  },
+  onAddToCart: () {
+    appState.addToCart(product);
+  },
+);
+
             }).toList(),
           ),
         );

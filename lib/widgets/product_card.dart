@@ -4,12 +4,14 @@ import '../models/product.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
+  final bool isFavorite;
   final VoidCallback? onFavoriteToggle;
   final VoidCallback? onAddToCart;
 
   const ProductCard({
     super.key,
     required this.product,
+    this.isFavorite = false,
     this.onFavoriteToggle,
     this.onAddToCart,
   });
@@ -19,15 +21,10 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  bool isFavorite = false;
-
-  void toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-
-    widget.onFavoriteToggle?.call();
-  }
+  
+void toggleFavorite() {
+  widget.onFavoriteToggle?.call();
+}
 
   void showImage() {
     showDialog(
@@ -91,12 +88,12 @@ class _ProductCardState extends State<ProductCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: toggleFavorite,
-                    icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: isFavorite ? Colors.red : null,
-                    ),
-                  ),
+  onPressed: toggleFavorite,
+  icon: Icon(
+    widget.isFavorite ? Icons.favorite : Icons.favorite_border,
+    color: widget.isFavorite ? Colors.red : null,
+  ),
+),
 
                   ElevatedButton(
                     onPressed: widget.onAddToCart,
