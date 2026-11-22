@@ -15,8 +15,11 @@ class ProfileScreen extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF0F2B6),
       appBar: AppBar(
-        title: const Text('Профіль'),
+        backgroundColor: const Color(0xFFF0F2B6),
+        foregroundColor: const Color(0xFF263E30),
+        title: const Text('ПРОФІЛЬ'),
       ),
       body: Center(
         child: ProfileWidget(user: user),

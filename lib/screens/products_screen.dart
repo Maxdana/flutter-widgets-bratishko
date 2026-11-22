@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../utils/app_state.dart';
 import '../widgets/product_card.dart';
+import 'cart_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
   final AppState appState;
@@ -64,37 +65,49 @@ class ProductsScreen extends StatelessWidget {
       animation: appState,
       builder: (context, child) {
         return Scaffold(
+          backgroundColor: const Color(0xFFF0F2B6),
           appBar: AppBar(
+            backgroundColor: const Color(0xFFF0F2B6),
+            foregroundColor: const Color(0xFF263E30),
             title: const Text('Книжки'),
             actions: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    const Icon(Icons.shopping_cart),
-                    const SizedBox(width: 5),
-                    Text('${appState.cartItemsCount}'),
-                  ],
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          CartScreen(appState: appState),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Color(0xFF263E30),
+                ),
+                label: Text(
+                  '${appState.cartItemsCount}',
+                  style: const TextStyle(
+                    color: Color(0xFF263E30),
+                  ),
                 ),
               ),
             ],
           ),
           body: ListView(
             children: products.map((product) {
-              
-return ProductCard(
-  product: product,
-  isFavorite: appState.favoriteProducts.any(
-    (item) => item.id == product.id,
-  ),
-  onFavoriteToggle: () {
-    appState.toggleFavorite(product);
-  },
-  onAddToCart: () {
-    appState.addToCart(product);
-  },
-);
-
+              return ProductCard(
+                product: product,
+                isFavorite: appState.favoriteProducts.any(
+                  (item) => item.id == product.id,
+                ),
+                onFavoriteToggle: () {
+                  appState.toggleFavorite(product);
+                },
+                onAddToCart: () {
+                  appState.addToCart(product);
+                },
+              );
             }).toList(),
           ),
         );

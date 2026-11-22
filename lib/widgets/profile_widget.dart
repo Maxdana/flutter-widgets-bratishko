@@ -19,7 +19,7 @@ class ProfileWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -27,16 +27,24 @@ class ProfileWidget extends StatelessWidget {
               radius: isCompact ? 30 : 50,
               backgroundImage: AssetImage(user.avatarPath),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             Text(
               user.name,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: const TextStyle(
+                fontSize: 22,
+                color: Color(0xFF263E30),
+                fontFamily: 'serif',
+              ),
             ),
+            const SizedBox(height: 8),
             Text(
               user.email,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF263E30),
+              ),
             ),
             if (!isCompact && onEditPressed != null)
               TextButton(

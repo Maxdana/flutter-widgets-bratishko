@@ -8,6 +8,7 @@ class ProductCard extends StatefulWidget {
   final bool isFavorite;
   final VoidCallback? onFavoriteToggle;
   final VoidCallback? onAddToCart;
+  final bool showCartButton;
 
   const ProductCard({
     super.key,
@@ -15,6 +16,7 @@ class ProductCard extends StatefulWidget {
     this.isFavorite = false,
     this.onFavoriteToggle,
     this.onAddToCart,
+    this.showCartButton = true,
   });
 
   @override
@@ -46,9 +48,19 @@ class _ProductCardState extends State<ProductCard> {
         toggleFavorite();
       },
       child: Card(
-        margin: const EdgeInsets.all(12),
+        color: const Color(0xFFF8F8DE),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 2,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(7),
+          side: const BorderSide(
+            color: Color(0xFFE5E5B8),
+          ),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,8 +68,7 @@ class _ProductCardState extends State<ProductCard> {
                 onTap: showImage,
                 child: Image.asset(
                   widget.product.imagePath,
-                  height: 180,
-                  width: double.infinity,
+                  height: 100,
                   fit: BoxFit.contain,
                   frameBuilder: (context, child, frame, wasLoaded) {
                     if (frame == null) {
@@ -65,8 +76,8 @@ class _ProductCardState extends State<ProductCard> {
                         baseColor: Colors.grey.shade300,
                         highlightColor: Colors.grey.shade100,
                         child: Container(
-                          height: 180,
-                          width: double.infinity,
+                          height: 100,
+                          width: 70,
                           color: Colors.white,
                         ),
                       );
@@ -75,33 +86,71 @@ class _ProductCardState extends State<ProductCard> {
                   },
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 6),
               Text(
                 widget.product.name,
                 style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Color(0xFF263E30),
+                  fontFamily: 'serif',
                 ),
               ),
-              Text(widget.product.author),
-              const SizedBox(height: 8),
-              Text('${widget.product.price} грн'),
+              const SizedBox(height: 6),
+              Text(
+                widget.product.author,
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF596A55),
+                ),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                '${widget.product.price} грн.',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF263E30),
+                ),
+              ),
+              const SizedBox(height: 3),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: toggleFavorite,
-                    icon: Icon(
-                      widget.isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: widget.isFavorite ? Colors.red : null,
+                  SizedBox(
+                    width: 36,
+                    height: 32,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: toggleFavorite,
+                      icon: Icon(
+                        widget.isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        size: 19,
+                        color: widget.isFavorite
+                            ? Colors.red
+                            : const Color(0xFF263E30),
+                      ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: widget.onAddToCart,
-                    child: const Text('До кошика'),
-                  ),
+                  if (widget.showCartButton)
+                    Expanded(
+                      child: SizedBox(
+                        height: 32,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF263E30),
+                            foregroundColor: const Color(0xFFF8F8DE),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          onPressed: widget.onAddToCart,
+                          child: const Text(
+                            'До кошика',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ],

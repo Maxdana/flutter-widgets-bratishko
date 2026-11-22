@@ -5,23 +5,19 @@ import '../models/user.dart';
 
 class AppState extends ChangeNotifier {
   List<Product> _favoriteProducts = [];
+  List<Product> _cartProducts = [];
   User? _currentUser;
-  int _cartItemsCount = 0;
 
-  // Отримання даних
   List<Product> get favoriteProducts => List.unmodifiable(_favoriteProducts);
-
+  List<Product> get cartProducts => List.unmodifiable(_cartProducts);
   User? get currentUser => _currentUser;
+  int get cartItemsCount => _cartProducts.length;
 
-  int get cartItemsCount => _cartItemsCount;
-
-  // Зміна користувача
   void setCurrentUser(User? user) {
     _currentUser = user;
     notifyListeners();
   }
 
-  // Додавання або видалення з обраного
   void toggleFavorite(Product product) {
     if (product.id.isEmpty) {
       debugPrint('Помилка: ID товару порожній');
@@ -43,7 +39,6 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  // Додавання товару до кошика
   void addToCart(Product product) {
     if (product.id.isEmpty) {
       debugPrint('Помилка: ID товару порожній');
@@ -51,7 +46,7 @@ class AppState extends ChangeNotifier {
     }
 
     try {
-      _cartItemsCount++;
+      _cartProducts = List.from(_cartProducts)..add(product);
       notifyListeners();
     } catch (e) {
       debugPrint('Помилка додавання до кошика: $e');
