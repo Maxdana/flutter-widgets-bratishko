@@ -104,10 +104,9 @@ flutter run -d chrome
 
 ## Діаграма архітектури Draw.io
 
-Структуру застосунку представлено у вигляді діаграми.
+[Переглянути всі 4 діаграми](https://viewer.diagrams.net/?url=https%3A%2F%2Fraw.githubusercontent.com%2FMaxdana%2Fflutter-widgets-bratishko%2Fmain%2FBudynok_Slovo_Architecture.drawio)
 
-[Переглянути файл діаграми на GitHub](https://github.com/Maxdana/flutter-widgets-bratishko/blob/main/Budynok_Slovo_Architecture.drawio)
-
+## СКРІНШОТИ
 
 ### Головний екран
 
