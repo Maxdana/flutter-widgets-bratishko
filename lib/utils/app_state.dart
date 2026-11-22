@@ -24,27 +24,37 @@ class AppState extends ChangeNotifier {
   // Додавання або видалення з обраного
   void toggleFavorite(Product product) {
     if (product.id.isEmpty) {
+      debugPrint('Помилка: ID товару порожній');
       return;
     }
 
-    _favoriteProducts = List.from(_favoriteProducts);
+    try {
+      _favoriteProducts = List.from(_favoriteProducts);
 
-    if (_favoriteProducts.any((item) => item.id == product.id)) {
-      _favoriteProducts.removeWhere((item) => item.id == product.id);
-    } else {
-      _favoriteProducts.add(product);
+      if (_favoriteProducts.any((item) => item.id == product.id)) {
+        _favoriteProducts.removeWhere((item) => item.id == product.id);
+      } else {
+        _favoriteProducts.add(product);
+      }
+
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Помилка зміни обраного: $e');
     }
-
-    notifyListeners();
   }
 
   // Додавання товару до кошика
   void addToCart(Product product) {
     if (product.id.isEmpty) {
+      debugPrint('Помилка: ID товару порожній');
       return;
     }
 
-    _cartItemsCount++;
-    notifyListeners();
+    try {
+      _cartItemsCount++;
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Помилка додавання до кошика: $e');
+    }
   }
 }
