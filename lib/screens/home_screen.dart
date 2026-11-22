@@ -1,8 +1,15 @@
 
 import 'package:flutter/material.dart';
+import '../utils/app_state.dart';
+import 'products_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final AppState appState;
+
+const HomeScreen({
+  super.key,
+  required this.appState,
+});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +41,16 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: () {},
-              child: const Text('Переглянути книжки'),
-            ),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductsScreen(appState: appState),
+      ),
+    );
+  },
+  child: const Text('Переглянути книжки'),
+),
           ],
         ),
       ),
