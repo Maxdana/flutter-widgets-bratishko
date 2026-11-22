@@ -1,17 +1,52 @@
-# budynok_slovo
+# Будинок «Слово»
 
-A new Flutter project.
+Навчальний Flutter-застосунок, створений для практичної роботи №5 «Віджети і компоненти» 
 
-## Getting Started
+## Опис проєкту
 
-This project is a starting point for a Flutter application.
+«Будинок “Слово”» — навчальна книжкова крамниця, присвячена українським письменникам Розстріляного відродження, пов'язаним із харківським будинком «Слово».
 
-A few resources to get you started if this is your first Flutter project:
+У застосунку буде представлено шість літературних творів:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+1. Микола Хвильовий — «Я (Романтика)»
+2. Михайль Семенко — «Дерзання»
+3. Майк Йогансен — «Баляди про війну і відбудову»
+4. Михайло Яловий — «Золоті лисенята»
+5. Микола Куліш — «Мина Мазайло»
+6. Вал'ян Підмогильний — «Місто»
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Застосунок передбачає перегляд каталогу, додавання книжок до обраного та кошика, перегляд профілю користувача й демонстрацію власних Flutter-віджетів.
+
+## Використані технології
+
+- Flutter
+- Dart
+- Git та GitHub
+
+## Запуск проєкту
+
+1. Встановити Flutter SDK.
+2. Відкрити папку проєкту у Visual Studio Code.
+3. Відкрити термінал.
+4. Виконати команди:
+
+```powershell
+flutter pub get
+flutter run -d chrome
+```
+
+## Структура проєкту
+
+- `lib/screens/` — екрани застосунку.
+- `lib/widgets/` — власні віджети.
+- `lib/models/` — моделі даних.
+- `lib/utils/` — налаштування та керування станом.
+
+## Реалізовані віджети
+
+Розділ доповнюватиметься
+
+## Скриншоти
+
+Розділ доповнюватиметься
+
