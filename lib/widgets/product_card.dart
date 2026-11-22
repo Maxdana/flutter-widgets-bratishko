@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import '../models/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -21,17 +22,18 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  
-void toggleFavorite() {
-  widget.onFavoriteToggle?.call();
-}
+  void toggleFavorite() {
+    widget.onFavoriteToggle?.call();
+  }
 
   void showImage() {
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
-          child: Image.asset(widget.product.imagePath),
+          child: InteractiveViewer(
+            child: Image.asset(widget.product.imagePath),
+          ),
         );
       },
     );
@@ -59,17 +61,21 @@ void toggleFavorite() {
                   fit: BoxFit.contain,
                   frameBuilder: (context, child, frame, wasLoaded) {
                     if (frame == null) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade100,
+                        child: Container(
+                          height: 180,
+                          width: double.infinity,
+                          color: Colors.white,
+                        ),
                       );
                     }
                     return child;
                   },
                 ),
               ),
-
               const SizedBox(height: 12),
-
               Text(
                 widget.product.name,
                 style: const TextStyle(
@@ -77,24 +83,21 @@ void toggleFavorite() {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               Text(widget.product.author),
-
               const SizedBox(height: 8),
-
               Text('${widget.product.price} грн'),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-  onPressed: toggleFavorite,
-  icon: Icon(
-    widget.isFavorite ? Icons.favorite : Icons.favorite_border,
-    color: widget.isFavorite ? Colors.red : null,
-  ),
-),
-
+                    onPressed: toggleFavorite,
+                    icon: Icon(
+                      widget.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: widget.isFavorite ? Colors.red : null,
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: widget.onAddToCart,
                     child: const Text('До кошика'),
